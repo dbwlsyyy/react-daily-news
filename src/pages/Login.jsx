@@ -27,11 +27,11 @@ const Login = () => {
         } catch (err) {
             console.log('로그인 실패 : ', err.code);
 
-            hendleFirebaseError(err.code);
+            handleFirebaseError(err.code);
         }
     };
 
-    const hendleFirebaseError = (code) => {
+    const handleFirebaseError = (code) => {
         switch (code) {
             case 'auth/user-not-found':
                 setError('존재하지 않는 이메일입니다.');
