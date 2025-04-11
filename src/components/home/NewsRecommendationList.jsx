@@ -25,7 +25,7 @@ const NewsRecommendationList = ({ category }) => {
 
     return (
         <Container>
-            <h5>{category} News</h5>
+            <h5>📬 {category} News</h5>
             <Row className="gy-3">
                 {dummyNews.map((news) => (
                     <Col xs={12} key={news.id}>

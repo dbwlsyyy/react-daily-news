@@ -1,14 +1,17 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
 import { Alert, Button, Card, Container, Form } from 'react-bootstrap';
 import { auth } from '../firebase/firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [success, setSuccess] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -17,8 +20,14 @@ const Signup = () => {
         setError('');
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            setSuccess('회원가입 성공 ✔️');
+            const userInfo = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            await updateProfile(userInfo.user, { displayName: name });
+            navigate('/');
             setEmail('');
             setPassword('');
         } catch (error) {
@@ -67,6 +76,18 @@ const Signup = () => {
                 <br />
 
                 <Form onSubmit={handleSignup}>
+                    <Form.Group className="mb-3" controlId="formName">
+                        <Form.Label>이름</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="이름을 입력하세요."
+                            required
+                            onChange={(e) => {
+                                setName(e.target.value);
+                            }}
+                            value={name}
+                        />
+                    </Form.Group>
                     <Form.Group className="mb-3" controlId="formEmail">
                         <Form.Label>이메일</Form.Label>
                         <Form.Control

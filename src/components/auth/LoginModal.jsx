@@ -1,32 +1,42 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
-import { Alert, Button, Card, Container, Form } from 'react-bootstrap';
-import { auth } from '../firebase/firebaseConfig';
+import { Alert, Button, Card, Container, Form, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { FcGoogle } from 'react-icons/fc';
 
-const Login = () => {
+const LoginModal = ({ show, onHide }) => {
+    const { loginWithEmail, loginWithGoogle } = useAuth();
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const navigate = useNavigate();
-
-    const handleLogin = async (e) => {
+    const handleEmailLogin = async (e) => {
         e.preventDefault();
         setError('');
 
         try {
-            const userSignIn = await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            console.log('로그인 성공 : ', userSignIn);
-            navigate('/');
+            await loginWithEmail(email, password);
+            console.log('로그인 성공 : ', loginWithEmail);
+            onHide();
         } catch (err) {
             console.log('로그인 실패 : ', err.code);
+            handleFirebaseError(err.code);
+        }
+    };
 
+    const handleGoogleLogin = async (e) => {
+        e.preventDefault();
+        setError('');
+
+        try {
+            await loginWithGoogle();
+            console.log('로그인 성공 : ', loginWithEmail);
+            onHide();
+        } catch (err) {
+            console.log('로그인 실패 : ', err.code);
             handleFirebaseError(err.code);
         }
     };
@@ -55,18 +65,12 @@ const Login = () => {
     };
 
     return (
-        <Container
-            className="d-flex justify-content-center align-items-center"
-            style={{ height: '100vh' }}
-        >
-            <Card
-                style={{ width: '100%', maxWidth: '400px' }}
-                className="p-4 shadow"
-            >
-                <br />
-                <h2 className="mb-4 text-center">LogIn 🔒</h2>
-                <br />
-                <Form onSubmit={handleLogin}>
+        <Modal show={show} onHide={onHide} centered>
+            <Modal.Header closeButton>
+                <Modal.Title className="ps-4">로그인</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="p-4 px-5">
+                <Form onSubmit={handleEmailLogin}>
                     <Form.Group className="mb-3" controlId="formEmail">
                         <Form.Label>이메일</Form.Label>
                         <Form.Control
@@ -77,9 +81,10 @@ const Login = () => {
                             }}
                             value={email}
                             required
+                            className="py-2 px-3"
                         />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formEmail">
+                    <Form.Group className="mb-4" controlId="formEmail">
                         <Form.Label>비밀번호</Form.Label>
                         <Form.Control
                             type="password"
@@ -89,22 +94,31 @@ const Login = () => {
                             }}
                             value={password}
                             required
+                            className="py-2 px-3"
                         />
                     </Form.Group>
                     <Button
                         variant="primary"
                         type="submit"
-                        className="w-100 mb-3"
+                        className="w-100 mb-2"
                     >
                         로그인
                     </Button>
-
-                    {error && (
-                        <Alert variant="danger" className="mb-3">
-                            {error}
-                        </Alert>
-                    )}
                 </Form>
+                <Button
+                    variant="outline-dark"
+                    onClick={handleGoogleLogin}
+                    className="d-flex align-items-center justify-content-center w-100 mb-2"
+                >
+                    <FcGoogle size={20} className="me-2" />
+                    Google 계정으로 로그인
+                </Button>
+
+                {error && (
+                    <Alert variant="danger" className="mb-2">
+                        {error}
+                    </Alert>
+                )}
                 <Button
                     onClick={() => {
                         navigate('/signup');
@@ -115,9 +129,9 @@ const Login = () => {
                 >
                     회원가입
                 </Button>
-            </Card>
-        </Container>
+            </Modal.Body>
+        </Modal>
     );
 };
 
-export default Login;
+export default LoginModal;
