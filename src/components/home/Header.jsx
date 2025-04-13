@@ -17,7 +17,7 @@ const Header = ({ period, setPeriod }) => {
                 도착했습니다! 🗞️
             </h1>
             <p className="text-muted mb-5">
-                알잘딱깔센 뉴스를 추천해드립니다. 지금 카테고리를 선택해보세요.
+                알잘딱깔센 뉴스를 요약해드립니다. 지금 카테고리를 선택해보세요.
                 😎
             </p>
 

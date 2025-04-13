@@ -26,51 +26,44 @@ const TopNavbar = () => {
     return (
         <>
             <Navbar
-                bg="dark"
-                variant="dark"
+                bg="light"
+                variant="light"
                 expand="lg"
-                className={`shadow-sm fixed-top transition-navbar ${
+                className={`shadow-sm px-4 py-2 fixed-top transition-navbar ${
                     isShrunk ? 'navbar-shrink' : ''
                 }`}
             >
                 <Navbar.Brand
                     as={Link}
                     to="/"
-                    className="fw-bold text-light logo-text"
+                    className="fw-bold text-dark logo-text"
                 >
                     THE NEW's
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto">
-                        {user ? (
-                            <>
-                                <Nav.Link as={Link} to="/profile">
-                                    {user.email}
-                                </Nav.Link>
-                                <Nav.Link onClick={logout}>로그아웃</Nav.Link>
-                            </>
-                        ) : (
-                            <>
-                                <Nav.Link
-                                    onClick={() => {
-                                        setShowLogin(true);
-                                    }}
-                                >
-                                    로그인
-                                </Nav.Link>
-                                <Nav.Link as={Link} to="/signup">
-                                    회원가입
-                                </Nav.Link>
-                            </>
-                        )}
-
-                        {/*<Nav.Link as={Link} to="/notification" className="text-light">
-                    <FiBell size={25} />
-                </Nav.Link>*/}
-                    </Nav>
-                </Navbar.Collapse>
+                <Nav className="ms-auto d-flex flex-row align-items-center gap-3">
+                    {user ? (
+                        <>
+                            <Nav.Link as={Link} to="/profile">
+                                {user.email}
+                            </Nav.Link>
+                            <Nav.Link onClick={logout}>로그아웃</Nav.Link>
+                        </>
+                    ) : (
+                        <>
+                            <Nav.Link
+                                onClick={() => {
+                                    setShowLogin(true);
+                                }}
+                            >
+                                로그인
+                            </Nav.Link>
+                            <Nav.Link as={Link} to="/signup">
+                                회원가입
+                            </Nav.Link>
+                        </>
+                    )}
+                </Nav>
             </Navbar>
             <LoginModal
                 show={showLogin}

@@ -24,7 +24,8 @@ const ProtectedRoute = ({ children }) => {
         );
     }
     if (!user) {
-        return <Navigate to="/login" />;
+        console.log('로그라웃됨');
+        return <Navigate to="/" />;
     }
 
     return children ? children : 'ERROR - 홈 화면이 없습니다.';
