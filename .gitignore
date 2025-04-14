@@ -5,22 +5,34 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# macOS, IDE 관련
 .DS_Store
+.vscode/
+.idea/
+
+# Build output
+client/dist/
+server/dist/
+dist/
+dist-ssr/
+
+# Node modules
+client/node_modules/
+server/node_modules/
+node_modules/
+
+# Env files (보안!)
+client/.env
+server/.env
+.env
+
+# Editor-specific
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-.env
+# Local config
+*.local

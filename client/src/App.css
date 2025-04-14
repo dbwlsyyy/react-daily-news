@@ -20,12 +20,11 @@ h1 {
 
 .transition-navbar {
     transition: all 0.2s ease-in-out;
-    padding: 0.8rem !important;
+    padding: 1rem !important;
 }
 
-.navbar-shrink {
-    padding-top: 0.3rem !important;
-    padding-bottom: 0.3rem !important;
+.transition-navbar.navbar-shrink {
+    padding: 0.2rem 1rem !important;
 }
 
 .logo-text {

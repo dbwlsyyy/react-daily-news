@@ -8,8 +8,16 @@ import NewsRecommendationList from '../components/home/NewsRecommendationList';
 import TopNavBar from '../components/home/TopNavBar';
 
 const Home = () => {
+    // const { user } = useAuth();
     const [period, setPeriod] = useState('daily');
     const [category, setCategory] = useState('');
+
+    // useEffect(() => {
+    //     if (!user) {
+    //         setPeriod('');
+    //         setCategory('');
+    //     }
+    // }, [user]);
 
     return (
         <>

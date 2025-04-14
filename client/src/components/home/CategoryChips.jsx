@@ -3,14 +3,14 @@ import { Button, Container } from 'react-bootstrap';
 
 const CategoryChips = ({ category, setCategory }) => {
     const categories = [
-        'Business',
+        '비즈니스',
         'IT',
-        'Health',
-        'Entertainment',
-        'Sports',
-        'Fashion',
-        'Science',
-        'Travel',
+        '건강',
+        '연예',
+        '스포츠',
+        '패션',
+        '과학',
+        '여행',
     ];
 
     return (

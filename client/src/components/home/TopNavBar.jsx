@@ -26,8 +26,8 @@ const TopNavbar = () => {
     return (
         <>
             <Navbar
-                bg="light"
-                variant="light"
+                bg="dark"
+                variant="dark"
                 expand="lg"
                 className={`shadow-sm px-4 py-2 fixed-top transition-navbar ${
                     isShrunk ? 'navbar-shrink' : ''
@@ -36,7 +36,7 @@ const TopNavbar = () => {
                 <Navbar.Brand
                     as={Link}
                     to="/"
-                    className="fw-bold text-dark logo-text"
+                    className="fw-bold text-light logo-text"
                 >
                     THE NEW's
                 </Navbar.Brand>

@@ -19,7 +19,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
-    console.log(user);
+    console.log('user : ', user);
 
     useEffect(() => {
         // 로그인 상태 감시

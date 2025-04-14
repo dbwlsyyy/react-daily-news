@@ -1,0 +1,53 @@
+.news-recommendation-container {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+        sans-serif;
+    color: #11248f; /* 인디고 포인트 컬러 */
+}
+
+.news-card {
+    border: none;
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+}
+
+.news-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.news-description {
+    font-size: 15px;
+    color: #666;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+.view-more-btn {
+    margin-top: 15px;
+    font-weight: 500;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    color: #3f51b5;
+    border-color: #3f51b5;
+}
+
+.view-more-btn:hover {
+    background-color: #3f51b5;
+    color: white;
+}
