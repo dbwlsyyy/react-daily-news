@@ -17,6 +17,34 @@ app.use(express.json());
 
 const PORT = 5000;
 
+app.get('/api/newsapi-news', async (req, res) => {
+    const { query } = req.query;
+    console.log(`newsAPI 쿼리 받음: ${query}`);
+
+    try {
+        const result = await axios.get('https://newsapi.org/v2/everything', {
+            headers: {
+                Authorization: `Bearer ${process.env.NEWS_API_KEY}`,
+            },
+            params: {
+                q: query,
+                language: 'ko',
+                sortBy: 'relevancy',
+                pageSize: 10,
+            },
+        });
+        console.log('news API 데이터:', result.data);
+        res.json(result.data);
+    } catch (error) {
+        console.error(
+            '🔥 news API 에러 발생:',
+            error.response?.data || error.message
+        );
+        res.status(500).json({ error: 'news API에서 fetch 실패' });
+    }
+});
+
+/* 네이버 뉴스 api
 app.get('/api/naver-news', async (req, res) => {
     const { query } = req.query;
     console.log(`쿼리 받음: ${query}`);
@@ -47,6 +75,7 @@ app.get('/api/naver-news', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch news from Naver' });
     }
 });
+*/
 
 app.listen(PORT, () => {
     console.log(`🚀 서버 실행 중: http://localhost:${PORT}`);

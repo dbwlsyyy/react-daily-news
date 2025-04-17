@@ -2,18 +2,26 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { fetchNaverNews } from '../../api/newsApi';
+import { fetchNewsapiNews } from '../../api/newsApi';
 import '../../css/NewsRecommendationList.css';
 
 const NewsRecommendationList = ({ category }) => {
     const [newsList, setNewsList] = useState([]);
+
+    const cleanUpText = (text) => {
+        // 양 많아지면 파일 분리
+        if (!text) return '';
+        return text
+            .replace(/The post .*? appeared first on .*?(\n|$)/gi, '')
+            .trim();
+    };
 
     useEffect(() => {
         console.log('newsList : ', newsList);
 
         const loadNews = async () => {
             try {
-                const result = await fetchNaverNews(category);
+                const result = await fetchNewsapiNews(category);
                 setNewsList(result);
                 console.log('result:', result);
             } catch (error) {
@@ -44,25 +52,17 @@ const NewsRecommendationList = ({ category }) => {
                         <Card className="news-card">
                             <Card.Body>
                                 <Card.Title className="news-title">
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: news.title,
-                                        }}
-                                    />
+                                    {news.title}
                                 </Card.Title>
                                 <Card.Text className="news-description">
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: news.description,
-                                        }}
-                                    />
+                                    {cleanUpText(news.description)}
                                 </Card.Text>
                                 <Button
                                     variant="outline-primary"
                                     size="sm"
                                     className="view-more-btn"
                                     onClick={() =>
-                                        window.open(news.link, '_blank')
+                                        window.open(news.url, '_blank')
                                     }
                                 >
                                     자세히 보기

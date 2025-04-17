@@ -5,12 +5,16 @@ const CategoryChips = ({ category, setCategory }) => {
     const categories = [
         '비즈니스',
         'IT',
+        '증시',
+        '경제',
         '건강',
         '연예',
         '스포츠',
         '패션',
         '과학',
         '여행',
+        '부동산',
+        'AI',
     ];
 
     return (
