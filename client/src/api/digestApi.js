@@ -1,13 +1,21 @@
 import axios from 'axios';
 
 const API = import.meta.env.VITE_API_BASE_URL;
-const OPENAI_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
-export const fetchDigestSummary = async (period) => {};
+export const fetchDigestNews = async (from, to) => {
+    try {
+        const res = await axios.get(`${API}/api/digest-news`, {
+            params: {
+                query: '정치',
+                from: from,
+                to: to,
+            },
+        });
+        console.log('🔥 digestNews:', res.data);
 
-const getQueryFromPeriod = (period) => {
-    switch (period) {
-        case 'daily':
-            return '오늘의 주요뉴스';
+        return res.data;
+    } catch (error) {
+        console.error('fetchDigestNews 에러 :', error);
+        return [];
     }
 };

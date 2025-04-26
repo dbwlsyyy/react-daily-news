@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { fetchNewsapiNews } from '../../api/newsApi';
+import { fetchRecommendListNews } from '../../api/recommendListApi';
 import '../../css/NewsRecommendationList.css';
 
 const NewsRecommendationList = ({ category }) => {
@@ -17,13 +17,10 @@ const NewsRecommendationList = ({ category }) => {
     };
 
     useEffect(() => {
-        console.log('newsList : ', newsList);
-
         const loadNews = async () => {
             try {
-                const result = await fetchNewsapiNews(category);
+                const result = await fetchRecommendListNews(category);
                 setNewsList(result);
-                console.log('result:', result);
             } catch (error) {
                 console.error('뉴스 불러오기 실패 : ', error);
             }
